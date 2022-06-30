@@ -179,4 +179,27 @@ public class ScoreOracleRepo implements ScoreRepository {
             return null;
         }
     }
+
+    @Override
+    public double getClassAverage() {
+        StringBuilder sql = new StringBuilder();
+        sql.append("SELECT AVG(average) AS avg_cls\n")
+                .append("FROM score");
+
+        try (Connection conn = Connect.makeConnection()) {
+
+            PreparedStatement pstmt = conn.prepareStatement(sql.toString());
+
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                return rs.getDouble("avg_cls");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0.0;
+
+    }
 }

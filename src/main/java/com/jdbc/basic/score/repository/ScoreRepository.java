@@ -20,4 +20,7 @@ public interface ScoreRepository {
 
     // 개별 성적 조회
     Score findOne(int stuNum);
+
+    // 반 전체 평균 조회
+    double getClassAverage();
 }
