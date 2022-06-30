@@ -17,6 +17,13 @@ dependencies {
     //오라클 라이브러리 (11g edition - gradle, maven 라이센스 문제 공식 지원 불가)
     implementation fileTree(dir: '/src/main/webapp/WEB-INF/lib', include: ['*.jar'])
 
+    // lombok 라이브러리
+    compileOnly 'org.projectlombok:lombok:1.18.24'
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
+
+    testCompileOnly 'org.projectlombok:lombok:1.18.24'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.24'
+
 }
 
 test {

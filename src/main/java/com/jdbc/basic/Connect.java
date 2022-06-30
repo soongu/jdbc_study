@@ -15,8 +15,6 @@ public class Connect {
     private final static String DRIVER = "oracle.jdbc.driver.OracleDriver";
 
 
-
-
     // DB 연결 메서드
     public static Connection makeConnection() {
 
@@ -31,8 +29,6 @@ public class Connect {
             e.printStackTrace();
             return null;
         }
-
     }
-
 
 }
