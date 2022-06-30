@@ -37,10 +37,13 @@ public class ScoreMenu {
                     findAllMenu();
                     break;
                 case 3:
+                    findOneMenu();
                     break;
                 case 4:
+                    modifyMenu();
                     break;
                 case 5:
+                    removeMenu();
                     break;
                 case 9:
                     System.out.println("\n# 프로그램을 종료합니다.");
@@ -52,6 +55,71 @@ public class ScoreMenu {
         }
 
 
+    }
+
+    // 5번 메뉴
+    private void removeMenu() {
+        System.out.println("\n# 삭제할 학생의 학번을 입력하세요!");
+        int stuNum = inputN(">>> ");
+
+        if (controller.hasScore(stuNum)) {
+
+            boolean flag = controller.deleteStudent(stuNum);
+            if (flag) {
+                System.out.println("# 삭제가 완료되었습니다.");
+            } else {
+                System.out.println("# 삭제에 실패했습니다.");
+            }
+
+        } else {
+            System.out.println("\n# 해당 학번은 존재하지 않습니다.");
+        }
+    }
+
+    // 4번 메뉴
+    private void modifyMenu() {
+
+        System.out.println("\n# 수정할 학생의 학번을 입력하세요!");
+        int stuNum = inputN(">>> ");
+
+        if (controller.hasScore(stuNum)) {
+
+            System.out.println("# 수정할 점수들을 입력하세요.");
+            int kor = inputN("- 국어: ");
+            int eng = inputN("- 영어: ");
+            int math = inputN("- 수학: ");
+
+            boolean flag = controller.updateStudent(stuNum, kor, eng, math);
+            if (flag) {
+                System.out.println("# 수정이 완료되었습니다.");
+            } else {
+                System.out.println("# 수정이 실패했습니다.");
+            }
+
+        } else {
+            System.out.println("\n# 해당 학번은 존재하지 않습니다.");
+        }
+    }
+
+    // 3번 메뉴
+    private void findOneMenu() {
+
+        System.out.println("\n# 조회할 학생의 학번을 입력하세요!");
+        int stuNum = inputN(">>> ");
+
+        Score student = controller.findOneStudent(stuNum);
+        if (student != null) {
+            System.out.println("\n========== 조회 결과 ===========");
+            System.out.println("- 학번: " + student.getStuNum());
+            System.out.println("- 이름: " + student.getStuName());
+            System.out.println("- 국어: " + student.getKor());
+            System.out.println("- 영어: " + student.getEng());
+            System.out.println("- 수학: " + student.getMath());
+            System.out.println("- 총점: " + student.getTotal());
+            System.out.println("- 평균: " + student.getAverage());
+        } else {
+            System.out.println("\n# 해당 학번은 존재하지 않습니다.");
+        }
     }
 
     // 2번 메뉴

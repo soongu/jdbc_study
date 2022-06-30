@@ -62,4 +62,37 @@ public class ScoreController {
 
     }
 
+    // 성적 개별 조회
+    public Score findOneStudent(int stuNum) {
+        return repository.findOne(stuNum);
+    }
+
+    // 성적 수정
+    public boolean updateStudent(int stuNum, int kor, int eng, int math) {
+        // 1. DB에서 해당 학생을 조회한다.
+        Score target = findOneStudent(stuNum);
+
+        if (target != null) {
+            // 2. 수정 진행
+            target.setKor(kor);
+            target.setEng(eng);
+            target.setMath(math);
+            target.calc();
+
+            // 3. DB에 수정 반영
+            return repository.modify(target);
+        }
+        return false;
+    }
+
+    // 성적정보 삭제
+    public boolean deleteStudent(int stuNum) {
+        return repository.remove(stuNum);
+    }
+
+    // 학번으로 조회했을 때 학생 존재 유무를 리턴
+    public boolean hasScore(int stuNum) {
+        return repository.findOne(stuNum) != null;
+    }
+
 }
